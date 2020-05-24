@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import {View,Text,Button,TextInput} from 'react-native';
+import {View,Text,Button,TextInput,Image,ImageBackground} from 'react-native';
 import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -25,6 +25,16 @@ function HomeScreen({ navigation, route}){
                 })
             }}
             />
+            <Image source={{uri: 'https://i0.hdslb.com/bfs/sycp/creative_img/202005/f49d046133d913f296b5b95391e5f16d.png'}} 
+            style={{width:300,height:180}}
+            resizeMode='stretch'/>
+            <ImageBackground source={{uri: 'https://i0.hdslb.com/bfs/sycp/creative_img/202005/f49d046133d913f296b5b95391e5f16d.png'}} 
+            style={{width:300,height:180}}>
+                <Text>
+                    内容
+                </Text>
+            </ImageBackground>
+
         </View>
     );
 }
@@ -76,7 +86,11 @@ function BaseNav() {
     return(
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="首页" component={HomeScreen}/>
+                <Stack.Screen 
+                name="首页" 
+                component={HomeScreen}
+                
+                />
                 <Stack.Screen name="Details" component={DetailsScreen} />
                 <Stack.Screen name="CreatePost" component={CreatePostScreen}/>
             </Stack.Navigator>

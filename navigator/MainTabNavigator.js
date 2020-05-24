@@ -8,18 +8,24 @@ import LKNearby from '../pages/LKNearby';
 import LKMine from '../pages/LKMine';
 
 // 底部导航
-const TABS = {
-    LKHome: {
-        screen: LKHome,
-        navigationOptions: {
-            tabBarLabel:'首页',
-            tabBarIcon: ({focused}) => {
-                if(!focused){
+const Tab = createBottomTabNavigator()
 
-                }else {
-                    
-                }
-            }
-        }
-    }
+function MyTabs() {
+    return(
+        <Tab.Navigator
+        initialRouteName="LKHome"
+        tabBarOptions={{
+            activeTintColor:'#e91e63',
+        }}>
+            <Tab.Screen
+            name="LKHome"
+            component={LKHome}
+            options={{
+                tabBarLabel:'首页',
+                tabBarIcon:({})=>(
+                    <Image/>
+                )
+            }}/>
+        </Tab.Navigator>
+    )
 }

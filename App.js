@@ -15,12 +15,12 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import BaseNav from './widget/main';
-// import Mytabbar from './widget/mytabbar';
+// import BaseNav from './widget/main';
+import Mytabbar from './widget/mytabbar';
 const App: () => React$Node = () => {
   return (
-      <BaseNav/>
-      // <Mytabbar/>
+      // <BaseNav/>
+      <Mytabbar/>
   );
 };
 

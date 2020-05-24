@@ -16,16 +16,25 @@ export default class LKHome extends Component {
     constructor(){
         super();
         this.state = {
-            dataArray:[{key:'a',name:'张三',imagename:''},{key:'b',name:'李四'}],
+            dataArray:[{key:'a',name:'张三'},{key:'b',name:'李四'}],
             refreshing:false,
         };
     }
 
     _onRefresh = () => {
         this.setState({refreshing:true});
-        fetchData().then(()=>{
-            this.setState({refreshing:false});
-        });
+        // 模拟加载数据
+        setTimeout(()=>{
+            let newDataArr = Array.from(new Array(5)).map((value,index)=>({
+                key:'b'+index,
+                name:'李四'
+            })).concat(this.state.dataArray);
+            //更新状态机
+            this.setState({
+                dataArray:newDataArr,
+                refreshing:false
+            });
+        },2000)
     }
     render(){
         return(
@@ -41,7 +50,20 @@ export default class LKHome extends Component {
                 refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh}/>
             }
-                >
+            ListHeaderComponent={()=>(
+                <View>
+                    <Text>组头</Text>
+                </View>
+            )}
+            ListFooterComponent={()=>{
+                return(
+                    <View>
+                    <Text>组尾</Text>
+                </View>
+                )
+                
+            }}
+            >
             
             </FlatList>
         );
@@ -51,7 +73,11 @@ export default class LKHome extends Component {
             <TouchableOpacity onPress={()=> this.props.navigation.push('HomeDetail')}>
                 <View style={styles.viewStyles}>
                     <Text>{index}</Text>
+                    <Image source={require('../assets/header_photo.webp')} style={styles.imageStyles}/>
                     <Text style={styles.textStyles}>{item.name}</Text>
+                    <Text style={{marginRight:40}}>8</Text>
+                    <Text style={{marginRight:10}}>测试</Text>
+                    
                 </View>
             </TouchableOpacity>
             
@@ -71,6 +97,12 @@ const styles = StyleSheet.create({
     },
     textStyles:{
         color:'white',
-        marginLeft:10
+        marginLeft:10,
+        // 撑满剩余的部分
+        flex:1
+    },
+    imageStyles:{
+        width:40,
+        height:40
     }
 })
